@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body >
+    
+    <div id="root">
+
+        <div class="up">
+            <input v-model="todo" placeholder="enter todo" type="text">
+            <button @click="AddTodo">Add</button>
+        </div>
+    
+        <div class="down">
+        
+            <!-- <div class="todo"><h1>{{todo}}</h1></div> -->
+        
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var vm = new Vue({
+            el:'#root',
+            data:{
+                todo:'',
+                todo_list:[],
+            },
+            methods:{
+                AddTodo:function(){
+
+                    if (this.todo){
+
+                        var todo = document.createElement('div');
+                        todo.setAttribute('class','todo')
+    
+                        var todo_text = document.createElement('h1');
+                        todo_text.textContent = this.todo;
+    
+                        
+                        todo.appendChild(todo_text)
+                        
+                        this.todo_list.push(todo)
+                        this.todo_list.reverse()
+
+                        var container = document.querySelector('.down');
+                        container.innerHTML = '';
+
+                        this.todo_list.forEach(item=>{
+                            container.appendChild(item)
+                        })
+                        
+                        this.todo = '';
+                    }else{
+                        alert('please enter todo text')
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
